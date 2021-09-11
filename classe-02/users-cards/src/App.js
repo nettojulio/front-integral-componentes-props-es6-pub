@@ -1,8 +1,8 @@
 import './App.css';
-import kelvin from './assets/kelvin-costa.png'
-import charles from './assets/charles-santos.png'
-import anna from './assets/anna-bia.png'
-import mario from './assets/mario-hisashi.png'
+import kelvin from './assets/kelvin-costa.png';
+import charles from './assets/charles-santos.png';
+import anna from './assets/anna-bia.png';
+import mario from './assets/mario-hisashi.png';
 
 function App() {
   const profiles = [{
@@ -36,12 +36,12 @@ function App() {
   ]
   return (
     <div className="App">
-      {profiles.map(unitprofile => 
-      <Profile picture={unitprofile.picture}>
-        {unitprofile.name}
-        {unitprofile.followers}
-        {unitprofile.username}
-        {unitprofile.following}
+      {profiles.map(unitprofile =>
+        <Profile key={unitprofile.username} picture={unitprofile.picture}>
+          {unitprofile.name}
+          {unitprofile.followers}
+          {unitprofile.username}
+          {unitprofile.following}
         </Profile>)}
 
       {/* <Profile picture={kelvin}>Kelvin Costa {140} @costa {207}</Profile>
@@ -50,20 +50,22 @@ function App() {
       <Profile picture={mario}>Mario Hisashi {28} @hisashi {17}</Profile> */}
     </div>
   );
+  function Profile({ picture, children: [name, followers, username, following] }) {
+    return (
+      <div className="profile">
+        <img className="profilePicture" alt={`${name}`} src={picture}></img>
+        <h1>{name}</h1>
+        <h2>{username}</h2>
+        <p>
+          {followers} seguidores<br />
+          {following} seguindo
+        </p>
+        {/* { console.log(username) } */}
+        {console.log(profiles.find(x => x.username === username))}
+      </div>
+    );
+  }
 }
 
-function Profile({picture, children:[ name, followers, username, following ] }) {
-  return (
-    <div className="profile">
-      <img className="profilePicture" alt={`${name}`} src={picture}></img>
-      <h1>{name}</h1>
-      <h2>{username}</h2>
-      <p>
-        {followers} seguidores<br/>
-        {following} seguindo
-      </p>
-    </div>
-  )
-}
 
 export default App;
